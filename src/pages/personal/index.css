@@ -1,0 +1,14 @@
+.personal{
+    padding:20px;
+}
+.personal .menu-item{
+    margin-bottom:20px;
+    line-height:30px;
+}
+.personal .menu-item-title{
+    margin-right:16px;
+    display:inline-block;
+    width:80px;
+    font-weight:bold;
+    text-align: right;
+}
