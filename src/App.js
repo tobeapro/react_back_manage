@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
 import { Button } from 'antd'
 import Login from './pages/login'
 import Home from './pages/home'
+import Personal from './pages/personal'
+import Article from './pages/article'
 const NoMatch = () => (
   <div style={{textAlign:'center',paddingTop:100}}>
     <h1>404</h1>
@@ -19,7 +21,9 @@ class App extends Component {
           <div>
             <Switch>
               <Route exact path="/login" component={Login} />
-              <Route path="/" component={Home} />
+              <Route exact path='/' component={Home} />
+              <Route exact path='/personal' component={Personal} />
+              <Route exact path='/article' component={Article} />
               <Route component={NoMatch} />
             </Switch>
           </div>
