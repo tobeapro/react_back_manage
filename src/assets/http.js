@@ -16,9 +16,9 @@ function checkTimeout(data){
         Modal.warning({
             title: '警告',
             content: '你未登录或登录信息已失效！',
-            afterClose(){
-                Router.push('/')  
-            }
+            // afterClose(){
+            //     Router.push('/')  
+            // }
         })
         throw new Error('timeout')
     }else{
