@@ -10,7 +10,7 @@ class LoginForm extends Component {
           password:values.password
         }).then(res=>{
           if(res.result===1){
-            this.props.history.push('/home')
+            this.props.history.push('/')
           }else if(res.msg){
             message.error(res.msg)
           }else{
@@ -24,7 +24,7 @@ class LoginForm extends Component {
     const { getFieldDecorator } = this.props.form
     return (
       <div className="login" style={{width:'400px',margin:'0 auto',paddingTop:100}}>
-        <Form>
+        <Form onSubmit={this.login}>
           <Form.Item>
             {getFieldDecorator('userName', {
             rules: [{ required: true, message: '请输入用户名' }],

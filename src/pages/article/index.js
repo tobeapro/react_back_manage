@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Table, message, Button } from 'antd'
+import { Table, message, Button, Popconfirm } from 'antd'
+import MainLayout from '../../components/mainLayout'
 import $http from '../../assets/http'
 import './index.css'
 export default class Article extends Component {
@@ -32,19 +33,25 @@ export default class Article extends Component {
         },
         {
           title: '操作',
+          dataIndex: 'action',
           key: 'action',
           width: 360,
           render: (text, record) => (
             <span>
               <Button size="small" type="primary" style={{marginRight:10}}>编辑</Button>
-              <Button size="small" type="danger">删除</Button>
+              <Popconfirm title="确认删除该条数据?" onConfirm={()=>{this.deleteItem}}  okText="确认" cancelText="取消">
+                <Button size="small" type="danger">删除</Button>
+              </Popconfirm>
             </span>
           )
         }
       ]
     }
   }
-  componentWillMount(){
+  deleteItem(){
+
+  }
+  getItems(){
     $http.get('back_manage/api/articles').then(res=>{
       if(res.result===1){
         this.setState({
@@ -59,11 +66,16 @@ export default class Article extends Component {
 
     })
   }
+  componentWillMount(){
+    this.getItems()
+  }
   render() {
     return (
-      <div className='articles'>
-        <Table size='small' columns={this.state.columns} dataSource={this.state.dataSource}></Table>
-      </div>
+      <MainLayout location='/article'>
+        <div className='articles'>
+          <Table size='small' rowKey='_id' columns={this.state.columns} dataSource={this.state.dataSource} bordered></Table>
+        </div>
+      </MainLayout>
     )
   }
 }
