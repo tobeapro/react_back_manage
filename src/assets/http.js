@@ -1,8 +1,7 @@
-import { BrowserRouter as Router} from "react-router-dom"
 import { Modal } from 'antd'
 import qs from "qs"
-let requsetUrl 
-process.env.NODE_ENV === 'development' ? requsetUrl = 'http://localhost:4000/' : requsetUrl = '/' 
+let requsetUrl
+process.env.NODE_ENV === 'development' ? requsetUrl = 'http://localhost:4000/' : requsetUrl = '/'
 function filterUrl(url){
     if(url.slice(0,4) === 'http' || url.slice(0,2) === '//'){
         return url
@@ -11,14 +10,13 @@ function filterUrl(url){
     }
 }
 function checkTimeout(data){
-
     if(data.result===0){
         Modal.warning({
             title: '警告',
             content: '你未登录或登录信息已失效！',
-            // afterClose(){
-            //     Router.push('/')  
-            // }
+            onOk(){
+                window.location.href = './login'
+            }
         })
         throw new Error('timeout')
     }else{
@@ -34,8 +32,8 @@ function filterFetch(url,options){
         }else{
             throw new Error('error status:' + res.status)
         }
-    },err=>{
-        throw new Error(err)
+    }).catch(err=>{
+        console.error(err)
     })
 }
 // function encodeFormData(data){
@@ -56,7 +54,7 @@ class request {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {'Content-Type': 'application/json;charset=utf-8'},
-            credentials: 'include' 
+            credentials: 'include'
         })
     }
     postForm(url,data){
@@ -64,7 +62,7 @@ class request {
             method: 'POST',
             body: qs.stringify(data),
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            credentials: 'include' 
+            credentials: 'include'
         })
     }
 }
