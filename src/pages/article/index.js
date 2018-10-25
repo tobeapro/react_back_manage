@@ -39,7 +39,7 @@ export default class Article extends Component {
           render: (text, record) => (
             <span>
               <Button size="small" type="primary" style={{marginRight:10}}>编辑</Button>
-              <Popconfirm title="确认删除该条数据?" onConfirm={()=>{this.deleteItem}}  okText="确认" cancelText="取消">
+              <Popconfirm title="确认删除该条数据?" onConfirm={()=>{this.deleteItem(record._id)}}  okText="确认" cancelText="取消">
                 <Button size="small" type="danger">删除</Button>
               </Popconfirm>
             </span>
@@ -48,8 +48,17 @@ export default class Article extends Component {
       ]
     }
   }
-  deleteItem(){
-
+  deleteItem = (id) => {
+    $http.get(`back_manage/api/article/delete?id=${id}`).then(res=>{
+      if(res.result===1){
+        message.success('删除成功')
+        this.getItems()
+      }else if(res.msg){
+        message.error(res.msg)
+      }else{
+        message.error('删除失败')
+      }
+    })
   }
   getItems(){
     $http.get('back_manage/api/articles').then(res=>{

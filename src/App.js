@@ -9,7 +9,7 @@ const NoMatch = () => (
   <div style={{textAlign:'center',paddingTop:100}}>
     <h1>404</h1>
     <Button type='primary'>
-      <Link to='/'>返回首页</Link>
+      <Link to='/login'>返回首页</Link>
     </Button>
   </div>
 )

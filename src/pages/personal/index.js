@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Icon, Input, Button, Checkbox, message, Avatar, Upload, Modal} from 'antd'
+import { Form, Icon, Input, Button, message, Avatar, Upload, Modal} from 'antd'
 import MainLayout from '../../components/mainLayout'
 import $http from '../../assets/http'
 import './index.css'
@@ -82,8 +82,8 @@ class PersonalForm extends Component {
                         Modal.warning({
                             title: '警告',
                             content: '你未登录或登录信息已失效！',
-                            afterClose(){
-                                _this.props.history.push('/login')  
+                            ok(){
+                                _this.props.history.push('/login')
                             }
                         })
                     }else if(info.file.response.msg){
@@ -91,7 +91,7 @@ class PersonalForm extends Component {
                     }else{
                         message.error('上传失败')
                     }
-                    
+
                 }else if(info.file.status === 'error'){
                     message.error('上传失败')
                 }
@@ -112,13 +112,13 @@ class PersonalForm extends Component {
                         <Form.Item label="头像" {...formItemLayout}>
                             {
                                 this.state.userInfo.avatar?
-                                <img width='100' style={{marginRight:20}} src={ROOTSERVER+this.state.userInfo.avatar} />
+                                <img width='100' style={{marginRight:20}} alt='avatar' src={ROOTSERVER+this.state.userInfo.avatar} />
                                 :
                                 <Avatar style={{marginRight:20}} icon="user" />
                             }
                             <Upload {...uploadProps}>
                             <Button>
-                                <Icon type="upload" /> 
+                                <Icon type="upload" />
                                     { this.state.userInfo.avatar?'更新头像':'上传头像' }
                                 </Button>
                             </Upload>
@@ -162,6 +162,6 @@ class PersonalForm extends Component {
             </MainLayout>
         )
     }
-} 
+}
 const Personal = Form.create()(PersonalForm)
 export default Personal

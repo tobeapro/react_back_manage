@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { Layout, Menu, Icon, Button } from 'antd'
-const { Header, Footer, Sider, Content } = Layout
+const { Header, Sider, Content } = Layout
 export default class MainLayout extends Component {
   constructor(props){
     super(props)

@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
-import { Form, Icon, Input, Button, Checkbox, message} from 'antd'
+import { Form, Icon, Input, Button, message} from 'antd'
 import $http from '../../assets/http'
 class LoginForm extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      username:'admin',
+      password:'123456'
+    }
+  }
   login = () => {
     this.props.form.validateFields((err,values)=>{
       if(!err){
@@ -18,6 +25,12 @@ class LoginForm extends Component {
           }
         })
       }
+    })
+  }
+  componentDidMount () {
+    this.props.form.setFieldsValue({
+      userName:this.state.username,
+      password:this.state.password
     })
   }
   render() {
